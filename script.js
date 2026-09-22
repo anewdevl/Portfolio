@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("theme-toggle");
   const navToggle = document.getElementById("nav-toggle");
   const navLinks = document.getElementById("nav-links");
-  const savedTheme = localStorage.getItem("theme") || "dark";
 
+  const savedTheme = localStorage.getItem("theme") || "dark";
   body.setAttribute("data-theme", savedTheme);
   syncThemeIcon(savedTheme);
 
@@ -20,18 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
     navToggle.setAttribute("aria-expanded", String(open));
   });
 
-  navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-  }));
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
 
   function syncThemeIcon(theme) {
-    themeToggle.querySelector("i").className = theme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
+    const icon = themeToggle.querySelector("i");
+    icon.className = theme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
   }
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.08, rootMargin: "0px 0px -20px 0px" });
 
   document.querySelectorAll(".project-card, .skill-card, .cert-card, .timeline-card, .stat-card, .mini-card, .profile-card").forEach((el) => {
     el.classList.add("fade-in");
@@ -48,5 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateBackToTop = () => backToTop.classList.toggle("visible", window.scrollY > 380);
   window.addEventListener("scroll", updateBackToTop, { passive: true });
   updateBackToTop();
-  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 });
