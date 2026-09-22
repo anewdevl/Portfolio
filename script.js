@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("theme-toggle");
   const navToggle = document.getElementById("nav-toggle");
   const navLinks = document.getElementById("nav-links");
-
   const savedTheme = localStorage.getItem("theme") || "dark";
+
   body.setAttribute("data-theme", savedTheme);
   syncThemeIcon(savedTheme);
 
@@ -16,71 +16,37 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   navToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
+    const open = navLinks.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(open));
   });
 
-  navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => navLinks.classList.remove("open"));
-  });
+  navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  }));
 
   function syncThemeIcon(theme) {
-    const icon = themeToggle.querySelector("i");
-    icon.className = theme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
+    themeToggle.querySelector("i").className = theme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
-  );
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
 
-  document
-    .querySelectorAll(".project-card, .skill-card, .cert-card, .timeline-card, .stat-card, .mini-card, .profile-card")
-    .forEach((el) => {
-      el.classList.add("fade-in");
-      observer.observe(el);
-    });
+  document.querySelectorAll(".project-card, .skill-card, .cert-card, .timeline-card, .stat-card, .mini-card, .profile-card").forEach((el) => {
+    el.classList.add("fade-in");
+    observer.observe(el);
+  });
 
   const backToTop = document.createElement("button");
   backToTop.type = "button";
   backToTop.className = "back-to-top";
   backToTop.setAttribute("aria-label", "Back to top");
   backToTop.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
-  backToTop.style.cssText = `
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--text);
-    display: grid;
-    place-items: center;
-    box-shadow: var(--shadow-tight);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(8px);
-    transition: all .25s ease;
-    z-index: 40;
-  `;
   document.body.appendChild(backToTop);
 
-  const updateBackToTop = () => {
-    const show = window.scrollY > 380;
-    backToTop.style.opacity = show ? "1" : "0";
-    backToTop.style.visibility = show ? "visible" : "hidden";
-    backToTop.style.transform = show ? "translateY(0)" : "translateY(8px)";
-  };
-
+  const updateBackToTop = () => backToTop.classList.toggle("visible", window.scrollY > 380);
   window.addEventListener("scroll", updateBackToTop, { passive: true });
   updateBackToTop();
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 });
