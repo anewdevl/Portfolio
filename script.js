@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const navToggle = document.getElementById("nav-toggle");
   const navLinks = document.getElementById("nav-links");
 
-  let savedTheme = "dark";
+  let savedTheme = "light";
   try {
-    savedTheme = localStorage.getItem("theme") === "light" ? "light" : "dark";
+    savedTheme = localStorage.getItem("theme") === "dark" ? "dark" : "light";
   } catch {
     // Keep the default when browser storage is unavailable.
   }

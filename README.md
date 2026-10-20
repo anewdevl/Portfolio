@@ -14,7 +14,7 @@ Open [index.html](./index.html) in a browser.
 - [styles.css](./styles.css): layout, responsive styles, and light/dark themes
 - [script.js](./script.js): theme toggle, mobile navigation, and back-to-top button
 
-The page uses DM Sans, DM Mono, and Fraunces from Google Fonts, and Font Awesome icons. These need an internet connection; system fonts are used as fallbacks.
+The page uses DM Sans and DM Mono from Google Fonts, and Font Awesome icons. These need an internet connection; system fonts are used as fallbacks.
 
 To change colors, edit the `:root` and `[data-theme="dark"]` variables in [styles.css](./styles.css).
 
