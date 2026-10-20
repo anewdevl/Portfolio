@@ -1,85 +1,31 @@
-# Adil Mohammed Ul Haq - Portfolio Website
+﻿# Adil Mohammed Ul Haq - Portfolio
 
-A modern, responsive portfolio website showcasing my skills, projects, and experience as a Computer Science student and software developer.
+My education, work experience, projects, skills, and certifications.
 
-## Features
+Built with HTML, CSS, and JavaScript. No build step or package installation is needed.
 
-- **Modern Design**: Clean, professional layout with smooth animations
-- **Dark/Light Theme**: Toggle between light and dark modes
-- **Responsive**: Fully responsive design that works on all devices
-- **Interactive**: Smooth scrolling, hover effects, and dynamic content
-- **Contact Form**: Functional contact form with validation
-- **Performance Optimized**: Fast loading with optimized assets
+## Run locally
 
-## Sections
+Open [index.html](./index.html) in a browser.
 
-- **Hero**: Introduction with call-to-action buttons
-- **About**: Personal information and key statistics
-- **Education**: Academic background and achievements
-- **Experience**: Professional experience and internships
-- **Projects**: Featured projects with GitHub links
-- **Skills**: Technical skills organized by category
-- **Certifications**: Professional certifications and credentials
-- **Contact**: Contact information and form
+## Files
 
-## Technologies Used
+- [index.html](./index.html): page content and contact links
+- [styles.css](./styles.css): layout, responsive styles, and light/dark themes
+- [script.js](./script.js): theme toggle, mobile navigation, and back-to-top button
 
-- **HTML5**: Semantic markup and structure
-- **CSS3**: Modern styling with CSS Grid and Flexbox
-- **JavaScript**: Interactive functionality and animations
-- **Font Awesome**: Icons and visual elements
-- **Google Fonts**: Inter font family for typography
+The page uses DM Sans, DM Mono, and Fraunces from Google Fonts, and Font Awesome icons. These need an internet connection; system fonts are used as fallbacks.
 
-## Deployment Options
-
-### Option 1: GitHub Pages (Free)
-1. Push your code to a GitHub repository
-2. Go to repository Settings > Pages
-3. Select source branch (usually main)
-4. Your site will be available at `https://yourusername.github.io/repository-name`
-
-### Option 2: Netlify (Free)
-1. Drag and drop your project folder to [Netlify](https://netlify.com)
-2. Or connect your GitHub repository for automatic deployments
-3. Get a custom domain or use the provided netlify.app URL
-
-### Option 3: Vercel (Free)
-1. Install Vercel CLI: `npm i -g vercel`
-2. Run `vercel` in your project directory
-3. Follow the prompts to deploy
-
-## Project Structure
-
-```
-portfolio/
-├── index.html          # Main HTML file
-├── styles.css          # CSS styles and animations
-├── script.js           # JavaScript functionality
-└── README.md           # Project documentation
-```
-
-## Customization
-
-### Colors
-Edit the CSS custom properties in `styles.css`:
-```css
-:root {
-    --primary-color: #2563eb;
-    --secondary-color: #64748b;
-    --accent-color: #f59e0b;
-}
-```
-
-### Content
-Update the HTML content in `index.html` to reflect your information.
+To change colors, edit the `:root` and `[data-theme="dark"]` variables in [styles.css](./styles.css).
 
 ## Contact
 
-- **Email**: adilulhaq267@gmail.com
-- **Phone**: +91 9959772721
-- **LinkedIn**: [linkedin.com/in/adil-mohammed-ul-haq/](https://www.linkedin.com/in/adil-mohammed-ul-haq/)
-- **GitHub**: [github.com/anewdevl](https://github.com/anewdevl)
+- Phone: [+16317484310](tel:+16317484310)
+- Location: New York, United States
+- Email: [adilulhaq267@gmail.com](mailto:adilulhaq267@gmail.com)
+- LinkedIn: [adil-mohammed-ul-haq](https://www.linkedin.com/in/adil-mohammed-ul-haq/)
+- GitHub: [anewdevl](https://github.com/anewdevl)
 
-Built by Adil Mohammed Ul Haq
+The contact section uses direct links; there is no contact form or backend.
 
-<!-- Deployed on Netlify -->
+See [deployment notes](./DEPLOYMENT.md) for the files to publish.

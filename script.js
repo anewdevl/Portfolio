@@ -4,14 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const navToggle = document.getElementById("nav-toggle");
   const navLinks = document.getElementById("nav-links");
 
-  const savedTheme = localStorage.getItem("theme") || "dark";
+  let savedTheme = "dark";
+  try {
+    savedTheme = localStorage.getItem("theme") === "light" ? "light" : "dark";
+  } catch {
+    // Keep the default when browser storage is unavailable.
+  }
   body.setAttribute("data-theme", savedTheme);
   syncThemeIcon(savedTheme);
 
   themeToggle.addEventListener("click", () => {
     const nextTheme = body.getAttribute("data-theme") === "light" ? "dark" : "light";
     body.setAttribute("data-theme", nextTheme);
-    localStorage.setItem("theme", nextTheme);
+    try {
+      localStorage.setItem("theme", nextTheme);
+    } catch {
+      // Theme switching still works without persistence.
+    }
     syncThemeIcon(nextTheme);
   });
 
@@ -27,21 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navLinks.classList.contains("open")) {
+      navLinks.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.focus();
+    }
+  });
+
   function syncThemeIcon(theme) {
     const icon = themeToggle.querySelector("i");
     icon.className = theme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
+    themeToggle.setAttribute("aria-label", theme === "light" ? "Switch to dark theme" : "Switch to light theme");
   }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
-    });
-  }, { threshold: 0.08, rootMargin: "0px 0px -20px 0px" });
-
-  document.querySelectorAll(".project-card, .skill-card, .cert-card, .timeline-card, .stat-card, .mini-card, .profile-card").forEach((el) => {
-    el.classList.add("fade-in");
-    observer.observe(el);
-  });
 
   const backToTop = document.createElement("button");
   backToTop.type = "button";
@@ -55,6 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBackToTop();
 
   backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   });
 });
